@@ -26,10 +26,7 @@ SECRET_KEY = 'django-insecure-qc22$-(qlufm!cxs4n6dy%0z-c0%^l)f6vt5q04s&ptk(bm*#4
 DEBUG = True
 
 ALLOWED_HOSTS = [
-	'localhost',
-	'django',
 	'127.0.0.1',
-	'152.10.0.1',
 ]
 
 # Application definition
@@ -149,20 +146,12 @@ REST_FRAMEWORK = {
 
 CSRF_TRUSTED_ORIGINS = [
 	'http://127.0.0.1:8000',
-	'http://localhost:8000',
 	'http://127.0.0.1:3000',
-	'http://localhost:3000',
-	'http://152.10.2.2:8000',
-	'http://152.10.2.2:3000',
 ]
 
 CORS_ALLOWED_ORIGINS = [
-	'http://152.10.2.2:8000',
-	'http://152.10.2.2:3000',
 	'http://127.0.0.1:3000',
-	'http://localhost:3000',
 	'http://127.0.0.1:8000',
-	'http://localhost:8000',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
