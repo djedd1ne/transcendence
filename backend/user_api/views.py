@@ -53,7 +53,7 @@ def token_42(request):
               'client_id' : 'u-s4t2ud-17c3d06c29a63f052756d513ba06d6d98b92ee95cb7b6a9dd4e66465af2477ab',
               'client_secret' : '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',
               'code' : code,
-              'redirect_uri' : 'http://127.0.0.1:8000/api/42token'
+              'redirect_uri' : 'http://152.10.0.1:8000/api/42token'
      }
     #print(state + '\n')
     #print(csrf + '\n')
