@@ -1,0 +1,46 @@
+version: "3.5"
+
+services:
+  react:
+    build: frontend/.
+    container_name: react
+    depends_on:
+      - postgresql
+    ports:
+      - "3000:3000"
+    networks:
+      inception:
+        ipv4_address: 152.10.2.1
+  django:
+    build: backend/.
+    container_name: django
+    networks:
+      inception:
+        ipv4_address: 152.10.2.2
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgresql
+      - react
+    environment:
+      - DJANGO_SUPERUSER_PASSWORD=admin
+      - DJANGO_SUPERUSER_EMAIL=admin@localhost.com
+      - DJANGO_SUPERUSER_USERNAME=admin
+  postgresql:
+    build: db/.
+    container_name: postgresql
+    networks:
+      inception:
+        ipv4_address: 152.10.2.3
+    environment:
+      - PGDATA=/usr/local/pgsql/data
+      - LD_LIBRARY_PATH=/usr/local/pgsql/lib
+      - PATH=/usr/local/pgsql/bin:/usr/lib/posgresql/15/bin:$PATH
+      - MANPATH=/usr/local/pgsql/share/man
+
+networks:
+  inception:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 152.10.0.0/16
