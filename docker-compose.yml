@@ -20,8 +20,8 @@ services:
       transcendence:
         ipv4_address: 152.10.2.2
     depends_on:
-      - postgresql
-      - react
+      postgresql:
+        condition: service_healthy
     environment:
       - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
       - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
@@ -37,6 +37,11 @@ services:
       - LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
       - PATH=${PATH}
       - MANPATH=${MANPATH}
+    healthcheck:
+      test: pg_isready -d django_db -U postgres -h 152.10.2.3 -p 5432
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
 networks:
   transcendence:
