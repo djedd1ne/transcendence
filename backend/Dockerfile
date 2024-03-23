@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
 
 ENV PATH=$PATH:/app/venv/bin
 
-COPY --link . /app/
+COPY . /app/
 WORKDIR /app
 RUN chmod +x script.sh && virtualenv venv && pip install -r requirements.txt
 
