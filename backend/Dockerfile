@@ -9,4 +9,5 @@ ENV PATH=$PATH:/app/venv/bin
 COPY --link . /app/
 WORKDIR /app
 RUN chmod +x script.sh && virtualenv venv && pip install -r requirements.txt
+
 CMD [ "sh", "./script.sh" ]

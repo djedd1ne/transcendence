@@ -6,4 +6,5 @@ RUN apt-get update && apt-get install -y \
 COPY --link . /app/
 WORKDIR /app
 RUN chmod +x script.sh && npm install
+
 CMD [ "sh", "./script.sh" ]
