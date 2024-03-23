@@ -3,7 +3,7 @@ FROM debian:latest
 RUN apt-get update && apt-get install -y \
 		npm
 
-COPY . /app/
+COPY --link . /app/
 WORKDIR /app
 RUN chmod +x script.sh
 RUN npm install
