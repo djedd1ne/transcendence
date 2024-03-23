@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:latest 
 
 RUN apt-get update && apt-get install -y \
 		postgresql 
@@ -7,6 +7,9 @@ ARG USERNAME=ssergiu
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 ARG PGDATA=/usr/local/pgsql/data
+ARG PATH=/usr/local/pgsql/bin:/usr/lib/postgresql/15/bin:$PATH
+ENV PGDATA=$PGDATA
+ENV PATH=$PATH
 
 # Create the user
 RUN groupadd --gid $USER_GID $USERNAME \
@@ -14,13 +17,13 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 RUN mkdir -p /usr/local/pgsql/lib
 RUN mkdir -p /usr/local/pgsql/bin
-RUN mkdir -p ${PGDATA}
+RUN mkdir ${PGDATA}
 RUN chown -R ssergiu /usr/local/pgsql
 RUN chown -R ssergiu /var/run/postgresql
 RUN mkdir -p /usr/local/share/man
 USER $USERNAME
-RUN ./usr/lib/postgresql/15/bin/initdb 
-RUN ./usr/lib/postgresql/15/bin/pg_ctl start && ./usr/lib/postgresql/15/bin/createuser postgres -s && ./usr/lib/postgresql/15/bin/createdb django_db && ./usr/lib/postgresql/15/bin/pg_ctl stop
+RUN initdb
+RUN pg_ctl start && createuser postgres -s && createdb django_db && pg_ctl stop
 COPY --link pg_hba.conf $PGDATA/.
 COPY --link postgresql.conf $PGDATA/.
-CMD [ "bash", "-c", "/usr/lib/postgresql/15/bin/postgres" ]
+CMD [ "bash", "postgres" ]

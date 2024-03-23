@@ -8,4 +8,4 @@ WORKDIR /app
 RUN chmod +x script.sh
 RUN npm install
 
-ENTRYPOINT /bin/bash -c "./script.sh"
+CMD [ "bash", "./script.sh" ]
