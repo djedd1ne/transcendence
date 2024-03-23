@@ -10,4 +10,4 @@ then
         --email $DJANGO_SUPERUSER_EMAIL
 fi
 
-python manage.py runserver 0.0.0.0:8000
+python manage.py runserver 152.10.2.2:8000
