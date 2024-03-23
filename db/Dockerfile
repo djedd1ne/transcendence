@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
 ARG USERNAME=ssergiu
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-ENV PGDATA=/usr/local/pgsql/data
+ARG PGDATA=/usr/local/pgsql/data
 ENV PATH=$PATH:/usr/local/pgsql/bin:/usr/lib/postgresql/15/bin
 
 # Create the user 
@@ -21,4 +21,4 @@ USER $USERNAME
 RUN initdb && pg_ctl start && createuser postgres -s && createdb django_db && pg_ctl stop
 COPY --link pg_hba.conf $PGDATA/.
 COPY --link postgresql.conf $PGDATA/.
-CMD [ "usr/lib/postgresql/15/bin/postgres" ]
+CMD [ "/usr/lib/postgresql/15/bin/postgres" ]
