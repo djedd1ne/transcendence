@@ -14,13 +14,13 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 RUN mkdir -p /usr/local/pgsql/lib
 RUN mkdir -p /usr/local/pgsql/bin
-RUN mkdir -p $PGDATA
+RUN mkdir -p ${PGDATA}
 RUN chown -R ssergiu /usr/local/pgsql
 RUN chown -R ssergiu /var/run/postgresql
 RUN mkdir -p /usr/local/share/man
 USER $USERNAME
 RUN ./usr/lib/postgresql/15/bin/initdb 
 RUN ./usr/lib/postgresql/15/bin/pg_ctl start && ./usr/lib/postgresql/15/bin/createuser postgres -s && ./usr/lib/postgresql/15/bin/createdb django_db && ./usr/lib/postgresql/15/bin/pg_ctl stop
-COPY pg_hba.conf $PGDATA/.
-COPY postgresql.conf $PGDATA/.
+COPY --link pg_hba.conf $PGDATA/.
+COPY --link postgresql.conf $PGDATA/.
 CMD [ "bash", "-c", "/usr/lib/postgresql/15/bin/postgres" ]
