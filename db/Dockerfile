@@ -20,6 +20,6 @@ RUN groupadd --gid $USER_GID $USERNAME \
 # Running postgres non root
 USER $USERNAME
 RUN initdb && pg_ctl start && createuser postgres -s && createdb django_db && pg_ctl stop
-COPY --link pg_hba.conf $PGDATA/.
-COPY --link postgresql.conf $PGDATA/.
+COPY pg_hba.conf $PGDATA/.
+COPY postgresql.conf $PGDATA/.
 CMD [ "/usr/lib/postgresql/15/bin/postgres" ]
