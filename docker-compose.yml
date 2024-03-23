@@ -22,8 +22,6 @@ services:
     depends_on:
       - postgresql
       - react
-    env_file:
-      - .env
     environment:
       - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
       - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
@@ -34,8 +32,6 @@ services:
     networks:
       inception:
         ipv4_address: 152.10.2.3
-    env_file:
-      - .env
     environment:
       - PGDATA=${PGDATA}
       - LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
