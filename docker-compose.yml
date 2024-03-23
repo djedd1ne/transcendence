@@ -22,21 +22,25 @@ services:
     depends_on:
       - postgresql
       - react
+    env_file:
+      - .env
     environment:
-      - DJANGO_SUPERUSER_PASSWORD=admin
-      - DJANGO_SUPERUSER_EMAIL=admin@localhost.com
-      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
+      - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
+      - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
   postgresql:
     build: db/.
     container_name: postgresql
     networks:
       inception:
         ipv4_address: 152.10.2.3
+    env_file:
+      - .env
     environment:
-      - PGDATA=/usr/local/pgsql/data
-      - LD_LIBRARY_PATH=/usr/local/pgsql/lib
-      - PATH=/usr/local/pgsql/bin:/usr/lib/posgresql/15/bin:$PATH
-      - MANPATH=/usr/local/pgsql/share/man
+      - PGDATA=${PGDATA}
+      - LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
+      - PATH=${PATH}
+      - MANPATH=${MANPATH}
 
 networks:
   inception:
