@@ -9,16 +9,16 @@ services:
     ports:
       - "3000:3000"
     networks:
-      inception:
+      transcendence:
         ipv4_address: 152.10.2.1
   django:
     build: backend/.
     container_name: django
-    networks:
-      inception:
-        ipv4_address: 152.10.2.2
     ports:
       - "8000:8000"
+    networks:
+      transcendence:
+        ipv4_address: 152.10.2.2
     depends_on:
       - postgresql
       - react
@@ -30,7 +30,7 @@ services:
     build: db/.
     container_name: postgresql
     networks:
-      inception:
+      transcendence:
         ipv4_address: 152.10.2.3
     environment:
       - PGDATA=${PGDATA}
@@ -39,7 +39,7 @@ services:
       - MANPATH=${MANPATH}
 
 networks:
-  inception:
+  transcendence:
     driver: bridge
     ipam:
       config:
