@@ -20,8 +20,7 @@ services:
       transcendence:
         ipv4_address: 152.10.2.2
     depends_on:
-      postgresql:
-        condition: service_healthy
+      - postgresql
     environment:
       - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
       - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
