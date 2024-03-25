@@ -1,13 +1,6 @@
-FROM debian:latest
-
-RUN apt-get update && apt-get install -y \
-		python3 \
-		python3-virtualenv
-
-ENV PATH=$PATH:/app/venv/bin
+FROM python:3.12-slim as base
 
 COPY . /app/
 WORKDIR /app
-RUN chmod +x script.sh && virtualenv venv && pip install -r requirements.txt
-
+RUN chmod +x script.sh && pip install -r requirements.txt
 CMD [ "sh", "./script.sh" ]
