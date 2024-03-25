@@ -1,10 +1,7 @@
-FROM debian:latest
-
-RUN apt-get update && apt-get install -y \
-		npm
+FROM node:slim as base
 
 COPY . /app/
 WORKDIR /app
 RUN chmod +x script.sh && npm install
 
-CMD [ "sh", "./script.sh" ]
+CMD npm start

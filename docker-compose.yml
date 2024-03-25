@@ -4,8 +4,6 @@ services:
   react:
     build: frontend/.
     container_name: react
-    depends_on:
-      - postgresql
     ports:
       - "3000:3000"
     networks:
@@ -19,8 +17,9 @@ services:
     networks:
       transcendence:
         ipv4_address: 152.10.2.2
-    depends_on:
-      - postgresql
+    depends_on: 
+      postgresql:
+        condition: service_healthy
     environment:
       - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
       - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
@@ -34,11 +33,12 @@ services:
     environment:
       - PGDATA=${PGDATA}
       - LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
-      - PATH=${PATH}
-      - MANPATH=${MANPATH}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     healthcheck:
       test: pg_isready -d django_db -U postgres -h 152.10.2.3 -p 5432
-      interval: 10s
+      interval: 8s
       timeout: 5s
       retries: 3
 
