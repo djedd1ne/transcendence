@@ -1,8 +1,9 @@
 FROM python:3.12-slim as base
 
-COPY . /app/
+COPY requirements.txt /app/.
 WORKDIR /app
+RUN pip install -r requirements.txt
 
-RUN pip install -r requirements.txt && chmod +x script.sh
-
+COPY . /app/.
+RUN chmod +x script.sh
 CMD [ "sh", "./script.sh" ]
