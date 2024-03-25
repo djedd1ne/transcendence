@@ -1,6 +1,7 @@
-FROM node:slim as base
+FROM node:21-alpine
 
 COPY . /app/
+WORKDIR /app/.
 RUN npm install
 
 CMD npm start
