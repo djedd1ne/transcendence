@@ -15,7 +15,6 @@ axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
-const urlParams = new URLSearchParams(window.location.search);
 const client = axios.create({
   baseURL: "http://127.0.0.1:8000"
 });
@@ -73,30 +72,17 @@ function App() {
       });
     });
   }
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
 
   function submit42Login(e) {
 	let uid="u-s4t2ud-17c3d06c29a63f052756d513ba06d6d98b92ee95cb7b6a9dd4e66465af2477ab"
 	let scope="public"
 	let url="https://api.intra.42.fr/oauth/authorize?client_id="+ uid +"&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000&response_type=code&scope=" + scope
 	window.open(url, "_self")
-	
+    e.preventDefault();
+	const urlParams = new URLSearchParams(window.location.search);
 	let code= urlParams.get("code");
-	client.post("/api/42token",
+	client.post(
+		"/api/42token",
 		{
 			code: code
 		}
