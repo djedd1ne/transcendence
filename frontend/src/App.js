@@ -92,8 +92,7 @@ function getCookie(name) {
 	let uid="u-s4t2ud-17c3d06c29a63f052756d513ba06d6d98b92ee95cb7b6a9dd4e66465af2477ab"
 	let scope="public"
 	let state=getCookie("csrftoken")
-	window.open("https://api.intra.42.fr/oauth/authorize?client_id="+ uid +"&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Fapi%2F42token&response_type=code&scope="
-		+ scope + "&state=" + state)
+	window.open("https://api.intra.42.fr/oauth/authorize?client_id="+ uid +"&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000&response_type=code&scope=" + scope + "&state=" + state, "_self")
   }
 
   function submitLogin(e) {
@@ -138,6 +137,12 @@ function getCookie(name) {
           <div className="center">
             <h2>You're logged in!</h2>
           </div>
+		<iframe title="gameFrame" 
+		src="http://127.0.0.1:8080"
+        frameborder="0"
+        scrolling="no"
+        height="960px"
+     width="100%"> </iframe>
         </div>
     );
   }

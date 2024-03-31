@@ -74,8 +74,8 @@ function definePercent()
 
 }
 
-server.listen(3000, () => {
-    console.log("Listening at :3000...");
+server.listen(3030, () => {
+    console.log("Listening at :3030...");
 });
 
 io.on("connection", (socket) => {
