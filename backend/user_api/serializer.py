@@ -3,6 +3,9 @@ from django.contrib.auth import get_user_model, authenticate
 
 UserModel = get_user_model()
 
+class TokenSerializer(serializers.Serializer):
+    code = serializers.CharField()
+
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
