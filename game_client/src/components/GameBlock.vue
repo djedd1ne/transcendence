@@ -145,7 +145,7 @@
       }
     },
     created() {
-      this.socket = io("http://localhost:3000");
+      this.socket = io("http://localhost:3030");
       // this.clientId = prompt("Enter client ID (11 or 22):");
       // this.newG();
       // this.socket.emit("identify", this.clientId);
