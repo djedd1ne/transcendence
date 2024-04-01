@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+HOST_IP=os.environ.get('HOST_IP')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -26,7 +29,7 @@ SECRET_KEY = 'django-insecure-qc22$-(qlufm!cxs4n6dy%0z-c0%^l)f6vt5q04s&ptk(bm*#4
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '10.13.7.9',
+    HOST_IP
 ]
 
 # Application definition
