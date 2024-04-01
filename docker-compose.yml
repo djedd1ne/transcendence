@@ -1,29 +1,25 @@
-version: "3.5"
+version: "3.8"
 
 services:
   react:
     build: frontend/.
     container_name: react
-    depends_on:
-      - postgresql
     ports:
       - "3000:3000"
     networks:
-      inception:
+      transcendence:
         ipv4_address: 152.10.2.1
   django:
     build: backend/.
     container_name: django
-    networks:
-      inception:
-        ipv4_address: 152.10.2.2
     ports:
       - "8000:8000"
-    depends_on:
-      - postgresql
-      - react
-    env_file:
-      - .env
+    networks:
+      transcendence:
+        ipv4_address: 152.10.2.2
+    depends_on: 
+      postgresql:
+        condition: service_healthy
     environment:
       - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
       - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
@@ -32,18 +28,38 @@ services:
     build: db/.
     container_name: postgresql
     networks:
-      inception:
+      transcendence:
         ipv4_address: 152.10.2.3
-    env_file:
-      - .env
     environment:
       - PGDATA=${PGDATA}
       - LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
-      - PATH=${PATH}
-      - MANPATH=${MANPATH}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    healthcheck:
+      test: pg_isready -d django_db -U postgres -h 152.10.2.3 -p 5432
+      interval: 8s
+      timeout: 5s
+      retries: 3
+  game_client:
+    build: game_client/.
+    container_name: game_client
+    ports:
+      - "8080:8080"
+    networks:
+      transcendence:
+        ipv4_address: 152.10.2.4
+  game_server:
+    build: game_server/.
+    container_name: game_server
+    ports:
+      - "3030:3030"
+    networks:
+      transcendence:
+        ipv4_address: 152.10.2.5
 
 networks:
-  inception:
+  transcendence:
     driver: bridge
     ipam:
       config:
