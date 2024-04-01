@@ -41,7 +41,7 @@ def test_api(request):
 
 @api_view(['GET', 'POST'])
 def authorize_42(request):
-    return Response('{}')
+    return Response('{"Hello" : "Reda"}')
 
 @api_view(['GET', 'POST'])
 def token_42(request):
