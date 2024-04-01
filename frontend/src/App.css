@@ -1,3 +1,48 @@
+body {
+  background-image: url('./bg-masthead.jpg'); /* Adjust the path if necessary */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  width: 90px;
+  /* max-width: 400px;  */
+}
+
+.form-label {
+  text-align: left;
+}
+.mb-3 input{
+  margin-left: 1000px;
+  width: 600px;
+}
+.input-group {
+  margin-bottom: 15px;
+}
+
+.center {
+  text-align: center;
+}
+
+.form-control::placeholder {
+  color: #999; /* Adjust placeholder color */
+  font-style: italic; /* Adjust font style */
+}
+
+.form-control {
+  border: 1px solid #ced4da; /* Adjust border color */
+  border-radius: 4px; /* Adjust border radius */
+  padding: 10px; /* Adjust padding */
+
+
+}
 .App {
   text-align: center;
 }
