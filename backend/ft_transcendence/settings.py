@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
 	'127.0.0.1',
+	'localhost',
 ]
 
 # Application definition
@@ -40,9 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'rest_framework',
-	'rest_framework.authtoken',
 	'corsheaders',
-	'oauth2_provider',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'django_db',
         'USER': 'postgres',
-        'PASSWORD': '',
+        'PASSWORD': 'postgres',
         'HOST': 'postgresql',
         'PORT': '5432',
     }

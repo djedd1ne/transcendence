@@ -1,11 +1,8 @@
-FROM debian:latest
+FROM node:21-alpine as base
 
-RUN apt-get update && apt-get install -y \
-		npm
-
-COPY --link . /app/
-WORKDIR /app
-RUN chmod +x script.sh
+WORKDIR /app/.
+COPY package.json /app/.
 RUN npm install
 
-CMD [ "bash", "./script.sh" ]
+COPY . /app/.
+CMD npm start
