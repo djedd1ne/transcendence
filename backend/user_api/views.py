@@ -33,24 +33,12 @@ def user_logout(request):
     return Response(status=status.HTTP_200_OK)
 
 @api_view(['GET', 'POST'])
-def test_api(request):
-    url = 'https://api.intra.42.fr/v2/me'
-    token = Token.objects.get(pk=1).access_token
-    headers = {'authorization': f'Bearer {token}'}
-    api_call = requests.get(url, headers = headers).json()
-    return Response(api_call)
-
-@api_view(['GET', 'POST'])
 def authorize_42(request):
     return Response('{"Hello" : "Reda"}')
 
 @api_view(['GET', 'POST'])
 def token_42(request):
-    print("entered token42", file=sys.stderr)
-    print("request code", file=sys.stderr)
     code = request.GET.get("code")
-    print("code requested", file=sys.stderr)
-    print("code is :" + code, file=sys.stderr)
     url = 'https://api.intra.42.fr/oauth/token'
     params = {'grant_type': 'authorization_code',
               'client_id' : 'u-s4t2ud-17c3d06c29a63f052756d513ba06d6d98b92ee95cb7b6a9dd4e66465af2477ab',
@@ -60,13 +48,13 @@ def token_42(request):
      }
     api_call = requests.post(url, params)
     data = api_call.json()
-    if list(data)[0] != "error":
-        m = Token.objects.create(**data)
-        return redirect('testapi')
-    else:
-        data = {"message" : "user already registered his token"}
-        return redirect('testapi')
-    return Response(data)
+    m = Token.objects.create(**data)
+    url = 'https://api.intra.42.fr/v2/me'
+    token = Token.objects.all().first().access_token
+    print("token: " + token, file=sys.stderr);
+    headers = {'authorization': f'Bearer {token}'}
+    api_call = requests.get(url, headers = headers).json()
+    return Response(api_call)
 
 @api_view(['POST'])
 def register(request):

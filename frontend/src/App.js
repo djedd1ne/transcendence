@@ -75,24 +75,8 @@ function App() {
   function submit42Login(e) {
 	let uid="u-s4t2ud-17c3d06c29a63f052756d513ba06d6d98b92ee95cb7b6a9dd4e66465af2477ab"
 	let scope="public"
-<<<<<<< Updated upstream
-	let url="https://api.intra.42.fr/oauth/authorize?client_id="+ uid +"&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000&response_type=code&scope=" + scope
-	window.open(url, "_self")
-    e.preventDefault();
-	const urlParams = new URLSearchParams(window.location.search);
-	let code= urlParams.get("code");
-	client.post(
-		"/api/42token",
-		{
-			code: code
-		}
-	).then(function(res) {
-		console.log(res)
-	});
-=======
 	let url="https://api.intra.42.fr/oauth/authorize?client_id="+ uid +"&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Fapi%2F42token&response_type=code&scope=" + scope
 	window.open(url, "_blank")
->>>>>>> Stashed changes
   }
 
   function submitLogin(e) {
