@@ -10,6 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from django.shortcuts import redirect
 from django.middleware.csrf import get_token
+import sys;
 
 # Create your views here.
 @api_view(['GET'])
@@ -45,18 +46,26 @@ def authorize_42(request):
 
 @api_view(['GET', 'POST'])
 def token_42(request):
-    serializer = TokenSerializer(data = request.data)
-    serializer.is_valid(raise_exception = True)
+    print("entered token42", file=sys.stderr)
+    print("request code", file=sys.stderr)
     code = request.GET.get("code")
+    print("code requested", file=sys.stderr)
+    print("code is :" + code, file=sys.stderr)
     url = 'https://api.intra.42.fr/oauth/token'
     params = {'grant_type': 'authorization_code',
               'client_id' : 'u-s4t2ud-17c3d06c29a63f052756d513ba06d6d98b92ee95cb7b6a9dd4e66465af2477ab',
-              'client_secret' : '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',
+              'client_secret' : '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',
               'code' : code,
               'redirect_uri' : 'http://127.0.0.1:8000/api/42token'
      }
     api_call = requests.post(url, params)
     data = api_call.json()
+    if list(data)[0] != "error":
+        m = Token.objects.create(**data)
+        return redirect('testapi')
+    else:
+        data = {"message" : "user already registered his token"}
+        return redirect('testapi')
     return Response(data)
 
 @api_view(['POST'])
