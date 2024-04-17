@@ -38,20 +38,23 @@ def authorize_42(request):
 
 @api_view(['GET', 'POST'])
 def token_42(request):
-    code = request.GET.get("code")
+    serializer = TokenSerializer(data = request.data)
+    serializer.is_valid(raise_exception = True)
+    code = serializer.data['code']
+    print("code: " + code, file=sys.stderr);
     url = 'https://api.intra.42.fr/oauth/token'
     params = {'grant_type': 'authorization_code',
               'client_id' : 'u-s4t2ud-17c3d06c29a63f052756d513ba06d6d98b92ee95cb7b6a9dd4e66465af2477ab',
               'client_secret' : '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',
               'code' : code,
-              'redirect_uri' : 'http://127.0.0.1:8000/api/42token'
+              'redirect_uri' : 'http://127.0.0.1:3000'
      }
     api_call = requests.post(url, params)
     data = api_call.json()
+    return Response(data)
     m = Token.objects.create(**data)
     url = 'https://api.intra.42.fr/v2/me'
     token = Token.objects.all().first().access_token
-    print("token: " + token, file=sys.stderr);
     headers = {'authorization': f'Bearer {token}'}
     api_call = requests.get(url, headers = headers).json()
     return Response(api_call)

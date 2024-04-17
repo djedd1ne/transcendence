@@ -14,9 +14,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
+const urlParams = new URLSearchParams(window.location.search);
 
 const client = axios.create({
-  baseURL: "http://10.13.7.9:8000"
+  baseURL: "http://127.0.0.1:8000"
 });
 
 function App() {
@@ -29,13 +30,20 @@ function App() {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    client.get("/api/test")
+	  let code = urlParams.get("code");
+	  if (code != null) {
+	  client.post("/api/42token", { code : code } )
     .then(function(res) {
-      setCurrentUser(true);
+	  if (res.data.access_token)
+	  {
+		  let key = res.data.access_token;
+		  console.log("key saved: " + key);
+		  localStorage.setItem("key", key);
+	  }
     })
     .catch(function(error) {
-      setCurrentUser(false);
     });
+	}
   }, []);
 
   function update_form_btn() {
@@ -75,8 +83,9 @@ function App() {
   function submit42Login(e) {
 	let uid="u-s4t2ud-17c3d06c29a63f052756d513ba06d6d98b92ee95cb7b6a9dd4e66465af2477ab"
 	let scope="public"
-	let url="https://api.intra.42.fr/oauth/authorize?client_id="+ uid +"&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Fapi%2F42token&response_type=code&scope=" + scope
-	window.open(url, "_blank")
+	let url="https://api.intra.42.fr/oauth/authorize?client_id="+ uid +"&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000&response_type=code&scope=" + scope
+	e.preventDefault();
+	window.open(url, "_self")
   }
 
   function submitLogin(e) {
@@ -192,8 +201,8 @@ function App() {
             </Button>
 			<p> </p>
           </Form>
-          <Form onSubmit={e => submit42Login(e)}>
-            <Button variant="primary" type="42login">
+          <Form onClick={e => submit42Login(e) } >
+            <Button variant="primary" type="42Login">
               Login 42
             </Button>
           </Form>
