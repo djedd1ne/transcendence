@@ -3,12 +3,14 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
+import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { changeLanguage } from './languageSwitcher';
+import languages from './languages';
+
 
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -29,6 +31,10 @@ function App() {
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem('language') || 'en');
+  const t = languages[currentLanguage];
+
+
 
   useEffect(() => {
     client.get("/api/test")
@@ -42,13 +48,19 @@ function App() {
 
   function update_form_btn() {
     if (registrationToggle) {
-      document.getElementById("form_btn").innerHTML = "Register";
+      document.getElementById("form_btn").innerHTML = t.register;
       setRegistrationToggle(false);
     } else {
-      document.getElementById("form_btn").innerHTML = "Log in";
+      document.getElementById("form_btn").innerHTML = t.login;
       setRegistrationToggle(true);
     }
   }
+
+  function handleLanguageChange(lang) {
+    changeLanguage(lang); // Update localStorage
+    setCurrentLanguage(lang); // Update state
+  }
+
 
   function submitRegistration(e) {
     e.preventDefault();
@@ -118,6 +130,7 @@ function getCookie(name) {
     });
   }
 
+  
   function submitLogout(e) {
     e.preventDefault();
     client.get(
@@ -133,7 +146,7 @@ function getCookie(name) {
       <div>
         <Navbar bg="dark" variant="dark">
           <Container>
-            <Navbar.Brand>Authentication App</Navbar.Brand>
+            <Navbar.Brand id="brandtr">Authentication App</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
@@ -168,11 +181,21 @@ function getCookie(name) {
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>
+      <Navbar bg="dark" variant="dark">
+        <Nav className="mr-auto">
+          <NavDropdown title="Language" id="language-dropdown">
+            <NavDropdown.Item onClick={() => changeLanguage('en')}>English</NavDropdown.Item>
+            <NavDropdown.Item onClick={() => changeLanguage('de')}>German</NavDropdown.Item>
+            <NavDropdown.Item onClick={() => changeLanguage('fr')}>French</NavDropdown.Item>
+          </NavDropdown>
+        </Nav>
+        {/* Your Navbar content */}
+      </Navbar>
     </Navbar>
     {
       registrationToggle ? (
         <div className="center">
-		  <h2> Register </h2>
+		  <h2 id="registername"> Register </h2>
           <Form onSubmit={e => submitRegistration(e)}>
 		  <Row className="mb-3">
 		   <Form.Group as={Col} controlId="formGridEmail">
@@ -196,7 +219,7 @@ function getCookie(name) {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" id="registerbutton">
               Register
             </Button>
           </Form>
