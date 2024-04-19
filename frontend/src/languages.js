@@ -17,7 +17,8 @@ const languages = {
     loggedInMessage: "You're logged in!",
     registerHeader: 'Register',
     loginHeader: 'Login',
-    login42: 'Login 42'
+    login42: 'Login 42',
+    authenticationapp:' authentification app'
   },
   de: {
     register: 'Registrieren',
@@ -37,7 +38,8 @@ const languages = {
     loggedInMessage: 'Sie sind angemeldet!',
     registerHeader: 'Registrieren',
     loginHeader: 'Anmelden',
-    login42: 'Anmelden 42'
+    login42: 'Anmelden 42',
+    authenticationapp:'zabi'
   },
   fr: {
     register: "S'inscrire",
@@ -57,7 +59,8 @@ const languages = {
     loggedInMessage: 'Vous êtes connecté(e)!',
     registerHeader: 'S\'inscrire',
     loginHeader: 'Connexion',
-    login42: 'Connexion 42'
+    login42: 'Connexion 42',
+    authenticationapp:' application'
   }
 };
 
