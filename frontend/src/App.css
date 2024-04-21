@@ -1,5 +1,5 @@
 body {
-  background-image: url('./bg-masthead.jpg'); /* Adjust the path if necessary */
+  background-image: url('../img/bg-masthead.jpg'); /* Adjust the path if necessary */
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -69,6 +69,119 @@ body {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.game-titel {
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: white;
+  padding: 10px;
+  /* border-radius: 10px; */
+}
+
+.scoreboard {
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  width: 100%;
+  display: flex;
+  color: white;
+  padding: 10px;
+  /* margin: 10px; */
+}
+
+.player-1-score-box {
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: left;
+  color: white;
+  padding: 10px;
+  margin-right: 75%;
+  margin-left: 5%;
+  border-radius: 10px;
+}
+
+.player-2-score-box {
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: right;
+  color: white;
+  padding: 10px;
+  /* margin-right: 10%; */
+  border-radius: 10px;
+}
+
+.chat-section {
+  background-color: rgba(92, 0, 125, 0.5);
+  text-align: left;
+  align-items: left;
+  width: 30%;
+  align-self: flex-end;
+  color: white;
+  /* padding: 20px; */
+  border-radius: 10px;
+}
+
+
+.chat-input-section {
+  background-color: rgb(255, 255, 255);
+  border-radius: 0px 0px 10px 10px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  /* align-self: flex-end; */
+  color: white;
+}
+
+.chat-text-box {
+  background-color: rgba(140, 140, 140, 0.641);
+  text-align: left;
+  align-items: left;
+  width: 100%;
+  color: rgb(0, 0, 0);
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.send-chat-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: right;
+  text-align: right;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  padding: 5px;
+  margin: 10px;
+}
+
+.chat-section-header {
+  background-color: rgba(0, 0, 0, 0.5);
+  /* text-align: left; */
+  width: 100%;
+  display: flex;
+  color: white;
+  /* padding: 20px; */
+  border-radius: 10px 10px 0px 0px;
+}
+
+.chat-heading {
+  text-align: center;
+  margin: 5px auto;
+  color: white;
+}
+
+.user-chat-avater {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 10px;
+}
+
+.close-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 10px;
+}
+
 
 .App-link {
   color: #61dafb;
