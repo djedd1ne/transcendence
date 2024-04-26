@@ -1,15 +1,7 @@
-// App.js
-
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Container from 'react-bootstrap/Container';
-import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { changeLanguage } from './languageSwitcher';
 import languages from './languages';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -23,12 +15,12 @@ const client = axios.create({
 
 const ChatMessage = ({ message, time, isUser }) => (
   <div className={`flex gap-5 ${isUser ? "self-end text-right" : ""} text-3xl text-black max-md:mt-10 max-md:flex-wrap`}>
-    {!isUser && <img src="../img/chat-avatar.png" alt="User1 avatar" className="in-chat-user1-avatar" />}
+    {!isUser && <img src="/Users/shetteemah/Documents/transcendence/frontend/src/chat-avatar.png" alt="User1 avatar" className="in-chat-user1-avatar" />}
     <div className={`${isUser ? "flex-auto" : "flex flex-col grow shrink-0 basis-0 w-fit"}`}>
       <div>{message}</div>
       {!isUser && <div className="mt-1.5 text-base text-neutral-400">{time}</div>}
     </div>
-    {isUser && <img src="../img/chat-avatar.png" alt="User2 avatar" className="in-chat-user2-avatar" />}
+    {isUser && <img src="/Users/shetteemah/Documents/transcendence/frontend/src/chat-avatar.png" alt="User2 avatar" className="in-chat-user2-avatar" />}
   </div>
 );
 
@@ -37,7 +29,7 @@ const ChatInput = () => (
     <div className="chat-text-box">
       Chat message...
     </div>
-      <img src="/path/to/send-icon.png" alt="Send message icon" className="send-chat-button" />
+      <img src="/Users/shetteemah/Documents/transcendence/frontend/img/send-icon.png" alt="Send message icon" className="send-chat-button" />
   </div>
 );
 
@@ -53,23 +45,25 @@ const ChatMessages = () => {
   ];
 
   return (
-    <div className="flex flex-col px-3.5 mt-48 max-md:mt-10 max-md:max-w-full">
+    <div className="chat-window">
       {messages.map((msg, index) => (
-        <React.Fragment key={index}>
-          <ChatMessage {...msg} />
-          {msg.isUser && <div className={`${msg.isUser ? "self-end" : ""} mr-14 text-base text-neutral-400 max-md:mr-2.5`}>{msg.time}</div>}
-        </React.Fragment>
+        <div
+          key={index}
+          className={`chat-message ${msg.isUser ? 'self-end' : ''}`}
+        >
+          {msg.message}
+          <div className="message-time">{msg.time}</div>
+        </div>
       ))}
-      <ChatInput />
     </div>
   );
 };
 
-const ChatHeader = () => (
+const ChatHeader = ({ onClose }) => (
   <header className="chat-section-header">
-    <img src="../img/chat-avatar.png" alt="Chat avatar" className="user-chat-avater" />
+    <img src="/Users/shetteemah/Documents/transcendence/frontend/src/chat-avatar.png" alt="Chat avatar" className="user-chat-avater" />
     <h2 className="chat-heading">Chat</h2>
-    <button className="close-button my-auto text-white">x</button>
+    <button className="close-button my-auto text-white" onClick={onClose}>x</button>
   </header>
 );
 
@@ -85,24 +79,36 @@ const ScoreBoard = () => (
 );
 
 function Playnchat() {
+  const [language, setLanguage] = useState(languages.english);
+  const [isChatOpen, setChatOpen] = useState(false);
+  const [blockedUsers, setBlockedUsers] = useState([]);
+
+  const toggleChat = () => {
+    setChatOpen(!isChatOpen);
+  };
+
+
   return (
     <div className="body">
-      <div className="game-and-chat-window">
-        <main className="game-window">
-          <section className="header-box">
-            <h1 className="game-titel">
-              PONG GAME
-            </h1>
-            <ScoreBoard />
-          </section>
-        </main>
+      <main className="game-window">
+        <section className="header-box">
+          <h1 className="game-titel">
+            PONG GAME
+          </h1>
+          <ScoreBoard />
+        </section>
+      </main>
+      <div className='chat-icon' onClick={toggleChat}>
+        <img src="/Users/shetteemah/Documents/transcendence/frontend/img/chat.svg" alt="Chat icon" />
+      </div>
+      {isChatOpen && (
         <aside className="chat-section">
           <div className="chat-window">
-            <ChatHeader />
+            <ChatHeader onClose={toggleChat} />
             <ChatMessages />
           </div>
         </aside>
-      </div>
+      )}
     </div>
   );
 }

@@ -1,9 +1,16 @@
 body {
-  background-image: url('../img/bg-masthead.jpg'); /* Adjust the path if necessary */
+}
+body {
+  background-image: url('../img/bg-masthead.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-color: #f5f5f5; 
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
+
 
 .form-container {
   display: flex;
@@ -106,80 +113,181 @@ body {
   border-radius: 10px;
 }
 
+/* App.css */
+
+
+.chat-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
 .chat-section {
-  background-color: rgba(92, 0, 125, 0.5);
-  text-align: left;
-  align-items: left;
-  width: 30%;
-  align-self: flex-end;
-  color: white;
-  /* padding: 20px; */
-  border-radius: 10px;
-}
-
-
-.chat-input-section {
-  background-color: rgb(255, 255, 255);
-  border-radius: 0px 0px 10px 10px;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  /* align-self: flex-end; */
-  color: white;
-}
-
-.chat-text-box {
-  background-color: rgba(140, 140, 140, 0.641);
-  text-align: left;
-  align-items: left;
-  width: 100%;
-  color: rgb(0, 0, 0);
-  margin: 5px;
-  border-radius: 10px;
-}
-
-.send-chat-button {
-  background-color: rgba(0, 0, 0, 0.5);
-  align-items: right;
-  text-align: right;
-  color: white;
-  width: 30px;
-  height: 30px;
-  border-radius: 100%;
-  padding: 5px;
-  margin: 10px;
+  background-color: #fff; /* White background */
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 998;
+  width: 320px; /* Adjust width as needed */
 }
 
 .chat-section-header {
-  background-color: rgba(0, 0, 0, 0.5);
-  /* text-align: left; */
-  width: 100%;
+  background-color: #007AFF; /* iOS blue */
+  border-top-left-radius: 20px; /* Rounded corners for top */
+  border-top-right-radius: 20px;
+  color: #fff;
   display: flex;
-  color: white;
-  /* padding: 20px; */
-  border-radius: 10px 10px 0px 0px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
 }
 
 .chat-heading {
-  text-align: center;
-  margin: 5px auto;
-  color: white;
-}
-
-.user-chat-avater {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin: 10px;
+  margin: 0;
+  font-size: 18px;
 }
 
 .close-button {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.chat-window {
+  height: 400px; /* Adjust height as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+  display: flex; /* Make messages display flex */
+  flex-direction: column; /* Align messages vertically */
+}
+
+.chat-input-section {
+  background-color: #f2f2f2; /* Light gray background */
+  border-bottom-left-radius: 20px; /* Rounded corners for bottom */
+  border-bottom-right-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.chat-text-box {
+  flex: 1; /* Take remaining space */
+  border-radius: 10px; /* Rounded corners */
+  padding: 8px;
+  margin: 5px;
+  background-color: #fff; /* White background */
+  font-family: inherit; /* Use the same font as the body */
+}
+
+.send-chat-button {
+  background-color: #007AFF; /* iOS blue */
+  border-radius: 50%; /* Circular button */
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px;
+  margin: 5px;
+  font-family: inherit; /* Use the same font as the body */
+}
+
+.chat-message {
+  background-color: #007AFF; /* iOS blue */
+  border-radius: 10px;
+  color: #fff;
+  padding: 10px;
+  margin: 5px;
+  max-width: 70%; /* Limit message width */
+}
+
+.chat-message.self-end {
+  background-color: #4cd964; /* Another color for user's messages */
+  align-self: flex-end;
+}
+
+.message-time {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+}
+
+.user-avatar {
   width: 30px;
   height: 30px;
-  border-radius: 50%;
-  margin: 10px;
+  border-radius: 50%; /* Circular avatar */
+  margin-right: 10px;
+}
+
+.self-end {
+  align-self: flex-end;
+}
+
+.max-md\\:mt-10 {
+  margin-top: 10px; /* Adjust margin for smaller devices */
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+  .chat-section {
+    width: 90%; /* Adjust width for smaller screens */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.options-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.options-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #d1d1d6; /* Light gray border */
+  padding: 10px; /* Add padding for spacing */
+}
+
+.options-item:last-child {
+  border-bottom: none; /* Remove bottom border for the last item */
+}
+
+.options-item span {
+  margin-right: 10px;
+}
+
+.options-dropdown {
+  position: fixed; /* Set position to fixed */
+  bottom: 20px; /* Adjust the distance from the bottom */
+  right: 20px; /* Adjust the distance from the right */
+  background-color: #ffffff; /* White background */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  box-shadow: 0 2px 8px rgba(60, 60, 67, 0.16), 0 1px 1px rgba(60, 60, 67, 0.08); /* iOS-like box shadow */
+  padding: 10px;
+}
+
+.option-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative; /* Set position to relative */
+}
+
+/* Style the buttons */
+.options-dropdown button {
+  display: block;
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  font-size: 16px;
+  color: #007AFF; /* iOS blue color */
+}
+
+.options-dropdown button:hover {
+  background-color: rgba(0, 122, 255, 0.1); /* Light blue background on hover */
 }
 
 
