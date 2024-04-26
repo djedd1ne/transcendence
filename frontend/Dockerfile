@@ -1,6 +1,6 @@
 FROM node:21-alpine as base
 
-RUN apk update && apk add vim
+RUN apk update
 WORKDIR /app/.
 COPY package.json /app/.
 RUN npm install

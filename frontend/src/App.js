@@ -29,21 +29,51 @@ function App() {
   const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
 
+
+async function getToken(e) {
+	  e.preventDefault();
+	  console.log("getToken");
+	  let code = getCode(e);
+	  let key;
+
+	  const resp = await client.post("/api/42token", 
+		  { 
+			  code : code 
+		  } 
+	  )
+		  console.log("key: " + key);
+		  key = res.data.access_token;
+		  localStorage.setItem("token", key);
+  }
+
+async function getUserInfo(e) {
+	  e.preventDefault();
+	  let token = localStorage.getItem("token");
+	  client.post("/api/userprofile", 
+		  { 
+			  token : token 
+		  } 
+	  ).then(function(res) {
+		  console.log("res: " + res);
+		});
+}
+
+async function getInfo(e) {
+	  e.preventDefault();
+	  await getToken(e);
+	  //const token = getToken(e);
+	  //console.log("token const: " + token);
+	  //const userInfo = await new getUserInfo(token);
+	  //console.log("userinfo const: " + userInfo);
+  }
+
+  function getCode(e) {
+	  const code = urlParams.get("code");
+	  return code;
+  }
+
   useEffect(() => {
-	  let code = urlParams.get("code");
-	  if (code != null) {
-	  client.post("/api/42token", { code : code } )
-    .then(function(res) {
-	  if (res.data.access_token)
-	  {
-		  let key = res.data.access_token;
-		  console.log("key saved: " + key);
-		  localStorage.setItem("key", key);
-	  }
-    })
-    .catch(function(error) {
-    });
-	}
+
   }, []);
 
   function update_form_btn() {
@@ -204,6 +234,16 @@ function App() {
           <Form onClick={e => submit42Login(e) } >
             <Button variant="primary" type="42Login">
               Login 42
+            </Button>
+          </Form>
+          <Form onClick={e => getInfo(e) } >
+            <Button variant="primary" type="42Login">
+              get info
+            </Button>
+          </Form>
+          <Form onClick={e => getUserInfo(e) } >
+            <Button variant="primary" type="42Login">
+              get user info
             </Button>
           </Form>
         </div>
