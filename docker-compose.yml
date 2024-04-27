@@ -41,22 +41,6 @@ services:
       interval: 8s
       timeout: 5s
       retries: 3
-      #  game_client:
-      #    build: game_client/.
-      #    container_name: game_client
-      #    ports:
-      #      - "8080:8080"
-      #    networks:
-      #      transcendence:
-      #        ipv4_address: 152.10.2.4
-      #  game_server:
-      #    build: game_server/.
-      #    container_name: game_server
-      #    ports:
-      #      - "3030:3030"
-      #    networks:
-      #      transcendence:
-      #        ipv4_address: 152.10.2.5
 
 networks:
   transcendence:
