@@ -1,15 +1,16 @@
+// App.js
+
 import './App.css';
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
+import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { changeLanguage } from './languageSwitcher';
+import languages from './languages';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -205,39 +206,37 @@ function App() {
               <Form.Control type="text" placeholder="Enter username to register" value={username} onChange={e => setUsername(e.target.value)} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+              <Form.Label>{t.password}</Form.Label>
+              <Form.Control type="password" placeholder={t.password} value={password} onChange={e => setPassword(e.target.value)} />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Register
+            <Button variant="primary" type="submit" className="primary-button">
+              {t.registerButton}
             </Button>
           </Form>
         </div>        
       ) : (
         <div className="center">
-		  <h2> Login </h2>
-          <Form onSubmit={e => submitLogin(e)}>
-            <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label>Username </Form.Label>
-              <Form.Control type="text" placeholder="Enter username to login" value={username} onChange={e => setUsername(e.target.value)} />
+          <h2>{t.loginHeader}</h2>
+          <Form onSubmit={submitLogin}>
+            <Form.Group className="mb-3" controlId="formGroupUsername">
+              <Form.Label>{t.username}</Form.Label>
+              <Form.Control type="text" placeholder={t.username} value={username} onChange={e => setUsername(e.target.value)} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+              <Form.Label>{t.password}</Form.Label>
+              <Form.Control type="password" placeholder={t.password} value={password} onChange={e => setPassword(e.target.value)} />
             </Form.Group>
-            <Button variant="primary" type="login">
-              Login
+            <Button variant="primary" type="submit" className="primary-button">
+              {t.loginButton}
             </Button>
-			<p> </p>
           </Form>
-          <Form onSubmit={e => submit42Login(e)}>
-            <Button variant="primary" type="42login">
-              Login 43
+          <Form onSubmit={submit42Login}>
+            <Button variant="primary" type="submit" className="primary-button">
+              {t.login42}
             </Button>
           </Form>
         </div>
-      )
-    }
+      )}
     </div>
   );
 }
