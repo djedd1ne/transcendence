@@ -87,7 +87,6 @@ function Playnchat() {
     setChatOpen(!isChatOpen);
   };
 
-
   return (
     <div className="body">
       <main className="game-window">
