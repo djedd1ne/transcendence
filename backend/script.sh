@@ -1,4 +1,11 @@
 #! /bin/bash
+
+# debugging 
+cp -R * /debug/.
+cd /debug
+chown -R $USER_GID:$USER_GID .
+#
+
 python manage.py makemigrations
 python manage.py migrate
 

@@ -6,9 +6,14 @@ services:
     container_name: react
     ports:
       - "3000:3000"
+    environment:
+      - HOST_IP=${HOST_IP}
+      - USER_GID=${USER_GID}
     networks:
       transcendence:
         ipv4_address: 152.10.2.1
+    volumes:
+      - ./debug/frontend:/debug/src
   django:
     build: backend/.
     container_name: django
@@ -20,7 +25,11 @@ services:
     depends_on: 
       postgresql:
         condition: service_healthy
+    volumes:
+      - ./debug/backend:/debug
     environment:
+      - HOST_IP=${HOST_IP}
+      - USER_GID=${USER_GID}
       - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
       - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
       - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
