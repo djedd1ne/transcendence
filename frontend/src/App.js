@@ -199,57 +199,47 @@ function App() {
 				<Col>
 				<Form.Control placeholder="Last name" value={last_name} onChange={e => setLastName(e.target.value)}/>
 				</Col>
-				</Row>
-				<Form.Group className="mb-3" controlId="formGroupEmail">
-				<Form.Label>Username</Form.Label>
-				<Form.Control type="text" placeholder="Enter username to register" value={username} onChange={e => setUsername(e.target.value)} />
-				</Form.Group>
-				<Form.Group className="mb-3" controlId="formGroupPassword">
-				<Form.Label>Password</Form.Label>
-				<Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-				</Form.Group>
-				<Button variant="primary" type="submit">
-				Register
-				</Button>
-				</Form>
-				</div>        
-			) : (
-				<div className="center">
-				<h2> Login </h2>
-				<Form onSubmit={e => submitLogin(e)}>
-				<Form.Group className="mb-3" controlId="formGroupEmail">
-				<Form.Label>Username </Form.Label>
-				<Form.Control type="text" placeholder="Enter username to login" value={username} onChange={e => setUsername(e.target.value)} />
-				</Form.Group>
-				<Form.Group className="mb-3" controlId="formGroupPassword">
-				<Form.Label>Password</Form.Label>
-				<Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-				</Form.Group>
-				<Button variant="primary" type="login">
-				Login
-				</Button>
-				<p> </p>
-				</Form>
-				<Form onClick={e => submit42Login(e) } >
-				<Button variant="primary" type="42Login">
-				Login 42
-				</Button>
-				</Form>
-				<Form onClick={e => getInfo(e) } >
-				<Button variant="primary" type="42Login">
-				get info
-				</Button>
-				</Form>
-				<Form onClick={e => getUserInfo(e) } >
-				<Button variant="primary" type="42Login">
-				get user info
-				</Button>
-				</Form>
-				</div>
-			)
-		}
-		</div>
-	);
+			</Row>
+            <Form.Group className="mb-3" controlId="formGroupEmail">
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" placeholder="Enter username to register" value={username} onChange={e => setUsername(e.target.value)} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGroupPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Register
+            </Button>
+          </Form>
+        </div>        
+      ) : (
+        <div className="center">
+		  <h2> Login </h2>
+          <Form onSubmit={e => submitLogin(e)}>
+            <Form.Group className="mb-3" controlId="formGroupEmail">
+              <Form.Label>Username </Form.Label>
+              <Form.Control type="text" placeholder="Enter username to login" value={username} onChange={e => setUsername(e.target.value)} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGroupPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+            </Form.Group>
+            <Button variant="primary" type="login">
+              Login
+            </Button>
+			<p> </p>
+          </Form>
+          <Form onSubmit={e => submit42Login(e)}>
+            <Button variant="primary" type="42login">
+              Login 43
+            </Button>
+          </Form>
+        </div>
+      )
+    }
+    </div>
+  );
 }
 
 export default App;
