@@ -23,6 +23,7 @@ body {
   margin-left: 1000px;
   width: 600px;
 }
+
 .input-group {
   margin-bottom: 15px;
 }
@@ -40,8 +41,6 @@ body {
   border: 1px solid #ced4da; /* Adjust border color */
   border-radius: 4px; /* Adjust border radius */
   padding: 10px; /* Adjust padding */
-
-
 }
 .App {
   text-align: center;

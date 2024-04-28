@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Ping Pong</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.8);
+      transition: background-color 0.3s ease;
+    }
+    .navbar-brand {
+      color: #333;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link {
+      color: #333;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #ff6b6b;
+    }
+    .jumbotron {
+      background-image: url('ping-pong-background.jpg');
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0;
+    }
+    .jumbotron-content {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      animation: fadeIn 1s ease;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .btn-play {
+      padding: 15px 30px;
+      font-size: 24px;
+      background-color: #ff6b6b;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .btn-play:hover {
+      background-color: #ee5253;
+    }
+    footer.footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Ping Pong Game</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <div class="jumbotron">
+    <div class="jumbotron-content">
+      <h1 class="display-4">Welcome to Online Ping Pong</h1>
+      <p class="lead">Ready to play?</p>
+      <button id="play-btn" class="btn-play">Play Now</button>
+    </div>
+  </div>
+
+  <!-- About section -->
+  <div id="about" class="container mt-5">
+    <div class="row">
+      <div class="col-md-8 mx-auto text-center">
+        <h2>About Online Ping Pong</h2>
+        <p>
+          Online Ping Pong is an exciting multiplayer game that allows you to play ping pong with your friends or random opponents online.
+        </p>
+        <p>
+          Challenge your friends to a match, or join a random game and compete against players from all over the world.
+        </p>
+        <p>
+          With intuitive controls and smooth gameplay, Online Ping Pong delivers an immersive gaming experience right in your browser.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact section -->
+  <div id="contact" class="container mt-5">
+    <div class="row">
+      <div class="col-md-8 mx-auto text-center">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or feedback, feel free to reach out to us.</p>
+        <p>Email: support@onlinepingpong.com</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <span>&copy; 2024 Online Ping Pong. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS (optional, for dropdowns, toggles, etc.) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
