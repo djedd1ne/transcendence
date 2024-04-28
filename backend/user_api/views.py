@@ -33,16 +33,12 @@ def user_logout(request):
 
 @api_view(['GET', 'POST'])
 def user_profile(request):
-    return Response('{"Hello" : "Reda"}')
     serializer = TokenSerializer(data = request.data)
     serializer.is_valid(raise_exception = True)
-    print("token python: " + serializer.data, file=sys.stderr);
-    token = serializer.data['token']
+    code = serializer.data['code']
     url = 'https://api.intra.42.fr/v2/me'
-    print("token real: " + code, file=sys.stderr);
-    headers = {'authorization': f'Bearer {token}'}
+    headers = {'authorization': f'Bearer {code}'}
     api_call = requests.get(url, headers = headers).json()
-    return Response('{"Hello" : "Reda"}')
     return Response(api_call)
 
 @api_view(['GET', 'POST'])
@@ -57,14 +53,14 @@ def token_42(request):
     print("code: " + code, file=sys.stderr);
     url = 'https://api.intra.42.fr/oauth/token'
     params = {'grant_type': 'authorization_code',
-              'client_id' : 'u-s4t2ud-7f57f7b3379f7f1c41bcded4163c98e58c344d1bb2add8917d428ffdd1ba28ab',
-              'client_secret' : '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',
+              'client_id' : 'u-s4t2ud-17c3d06c29a63f052756d513ba06d6d98b92ee95cb7b6a9dd4e66465af2477ab',
+              'client_secret' : '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',
               'code' : code,
               'redirect_uri' : 'http://127.0.0.1:3000'
      }
     api_call = requests.post(url, params)
     data = api_call.json()
-    return Response(data)
+    return Response(data['access_token'])
 
 @api_view(['POST'])
 def register(request):
