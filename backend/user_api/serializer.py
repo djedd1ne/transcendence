@@ -28,7 +28,6 @@ class UserRegisterSerializer(serializers.ModelSerializer):
                     password=data['password'])
         user_obj.first_name=data['first_name']
         user_obj.last_name=data['last_name']    
-        user_obj.groups.set('1') 
         user_obj.save()
         return user_obj
 
