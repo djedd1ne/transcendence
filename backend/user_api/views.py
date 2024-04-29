@@ -18,14 +18,6 @@ import sys;
 def index(request):
     return Response(status = status.HTTP_200_OK)
 
-@api_view(['POST'])
-def user_login(request):
-  serializer = LoginSerializer(data=request.data)
-  serializer.is_valid(raise_exception=True)
-  user = serializer.validate(request.data) 
-  login(request, user)
-  return Response(serializer.data)
-
 @api_view(['GET'])
 def user_logout(request):
     logout(request)
@@ -71,3 +63,12 @@ def register(request):
         if user:
             return Response(serializer.data)
     return Response(status = status.HTTP_200_OK)
+
+@api_view(['POST'])
+def user_login(request):
+  serializer = LoginSerializer(data=request.data)
+  serializer.is_valid(raise_exception=True)
+  user = serializer.validate(request.data) 
+  login(request, user)
+  return Response(serializer.data)
+
