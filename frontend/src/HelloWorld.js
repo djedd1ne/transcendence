@@ -7,8 +7,8 @@ function HelloWorld() {
 		  method: 'post',
 		  url: 'http://127.0.0.1/login',
 		  data: {
-			      firstName: 'user1234',
-			      lastName: 'banana1234'
+			      firstName: 'john',
+			      lastName: 'doe'
 			    }
 	})
 	.then(function (response) {

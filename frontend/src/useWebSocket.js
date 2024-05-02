@@ -1,32 +1,27 @@
-// useWebSocket.js
-
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 
 const useWebSocket = (url) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const ws = new WebSocket(url);
+    const socket = io('http://localhost:3000');
 
-    ws.onopen = () => {
-      console.log('WebSocket Connected');
-    };
+    socket.on('connect', () => {
+      console.log('WebSocket Connected:', socket.id);
+    });
 
-    ws.onerror = (error) => {
-      console.error('WebSocket Error:', error);
-    };
+    socket.on('connect_error', (error) => {
+      console.error('Connection Error:', error);
+    });
 
-    ws.onclose = () => {
-      console.log('WebSocket Disconnected');
-      // Optionally try to reconnect here
-    };
-
-    setSocket(ws);
+    setSocket(socket);
 
     return () => {
-      ws.close();
+      socket.disconnect();
+      console.log('WebSocket Disconnected');
     };
-  }, [url]);
+  }, ['http://localhost:3000']);
 
   return socket;
 };

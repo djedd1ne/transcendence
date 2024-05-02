@@ -10,6 +10,10 @@ import ChatWindow from './ChatWindow';
 import ProfilePage from './ProfilePage';
 import NotificationsComponent from './NotificationsComponent';
 import { NotificationProvider } from './NotificationContext';
+import ChatIcon from './ChatIcon';
+import ChatBox from './ChatBox';
+import DeleteContact from './DeleteContact';
+import ConfirmationDialog from './ConfirmationDialog'
 import Container from 'react-bootstrap/Container';
 import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
@@ -233,39 +237,47 @@ function App() {
     }
   }, [socket]);
 
+  const handleDeleteContact = contactId => {
+    setContacts(currentContacts => currentContacts.filter(contact => contact.id !== contactId));
+  };
+
+  const [showChat, setShowChat] = useState(false);
   const [activeChat, setActiveChat] = useState(null);
-
-  const handleChat = (contact) => {
-    setActiveChat(contact);
-  };
-
-  const closeChat = () => {
-    setActiveChat(null);
-  };
-
   const [activeProfile, setActiveProfile] = useState(null);
 
+  const toggleChat = () => setShowChat(!showChat);
+  const handleChat = (contact) => {
+    setActiveChat(contact);
+    setShowChat(true);
+  };
+  const closeChat = () => setActiveChat(null);
   const handleProfile = (contact) => {
     setActiveProfile(contact);
+    setShowChat(true);
   };
-
-  const closeProfile = () => {
-    setActiveProfile(null);
-  };
+  const closeProfile = () => setActiveProfile(null);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <div className="app-container">
       <NotificationProvider>
-        <Contacts
-          contacts={contacts}
-          onChat={handleChat}
-          onViewProfile={handleProfile}
-        />
-        {activeChat && <ChatWindow contact={activeChat} onClose={closeChat} />}
-        {activeProfile && <ProfilePage contact={activeProfile} onBack={closeProfile} />}
+        {!showChat && <ChatIcon toggleChat={toggleChat} />}
+        {showChat && (
+          <ChatBox
+            contacts={contacts}
+            onChat={handleChat}
+            onBlock={(contact) => console.log('Block contact:', contact.name)}
+            onDelete={handleDeleteContact}
+            onViewProfile={handleProfile}
+            activeChat={activeChat}
+            activeProfile={activeProfile}
+            closeChat={() => setActiveChat(null)}
+            closeProfile={() => setActiveProfile(null)}
+            socket={socket}
+          />
+        )}
         <NotificationsComponent />
       </NotificationProvider>
-    </Suspense>
+    </div>
   );
 }
 
