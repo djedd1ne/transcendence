@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import Header from './Header';
 
-const ChatWindow = ({ contact, onClose, socket }) => {
+const ChatWindow = ({ contact, onClose, onBack, socket }) => {
   const [message, setMessage] = useState('');
-  const [chatHistory, setChatHistory] = useState(contact.chatHistory);
+  const [chatHistory, setChatHistory] = useState(contact.chatHistory || []);
 
   useEffect(() => {
     const receiveMessage = (msg) => {
@@ -24,10 +25,13 @@ const ChatWindow = ({ contact, onClose, socket }) => {
 
   return (
     <div className="chat-window">
-      <div className="chat-header">
-        Chat with {contact.name}
-        <button onClick={onClose}>Close</button>
-      </div>
+      <Header
+        onBack={onBack}
+        profilePic={contact.avatarUrl}
+        title={`${contact.name}'`}
+        onOptions={() => console.log('Options clicked')}
+        onClose={onClose}
+      />
       <div className="chat-messages">
         {chatHistory.map((msg, index) => (
           <div key={index} className={`chat-message ${msg.isUser ? 'self-end' : ''}`}>

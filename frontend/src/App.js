@@ -22,6 +22,8 @@ import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { changeLanguage } from './languageSwitcher';
 import languages from './languages';
+import avatarUrl from './chat-avatar.png';
+
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -213,16 +215,16 @@ const client = axios.create({
 
 function App() {
   const [contacts, setContacts] = useState([
-    { id: 1, name: 'Alice', blocked: false, chatHistory: [], profileViewed: false },
-    { id: 2, name: 'Bob', blocked: false, chatHistory: [], profileViewed: false },
-    { id: 3, name: 'Charlie', blocked: false, chatHistory: [], profileViewed: false },
-    { id: 4, name: 'David', blocked: false, chatHistory: [], profileViewed: false },
-    { id: 5, name: 'Eva', blocked: false, chatHistory: [], profileViewed: false },
-    { id: 6, name: 'Fiona', blocked: false, chatHistory: [], profileViewed: false },
-    { id: 7, name: 'George', blocked: false, chatHistory: [], profileViewed: false },
-    { id: 8, name: 'Hannah', blocked: false, chatHistory: [], profileViewed: false },
-    { id: 9, name: 'Ivan', blocked: false, chatHistory: [], profileViewed: false },
-    { id: 10, name: 'Julia', blocked: false, chatHistory: [], profileViewed: false }
+    { id: 1, intra: 'sheali', name: 'Alice Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
+    { id: 2, intra: 'sheali', name: 'Bob Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
+    { id: 3, intra: 'sheali', name: 'Charlie Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl },
+    { id: 4, intra: 'sheali', name: 'David Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
+    { id: 5, intra: 'sheali', name: 'Eva Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
+    { id: 6, intra: 'sheali', name: 'Fiona Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
+    { id: 7, intra: 'sheali', name: 'George Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl },
+    { id: 8, intra: 'sheali', name: 'Hannah Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl },
+    { id: 9, intra: 'sheali', name: 'Ivan Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
+    { id: 10,intra: 'sheali',  name: 'Julia Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl}
   ]);
 
   const socket = useWebSocket('ws:http://127.0.0.1:8000/ws');
@@ -250,7 +252,12 @@ function App() {
     setActiveChat(contact);
     setShowChat(true);
   };
-  const closeChat = () => setActiveChat(null);
+
+  const handleClose = () => {
+    console.log("Closing chat box...");
+    setShowChat(false);
+  };
+
   const handleProfile = (contact) => {
     setActiveProfile(contact);
     setShowChat(true);
@@ -266,12 +273,12 @@ function App() {
             contacts={contacts}
             onChat={handleChat}
             onBlock={(contact) => console.log('Block contact:', contact.name)}
-            onDelete={handleDeleteContact}
+            onDeleteConfirm={handleDeleteContact}
             onViewProfile={handleProfile}
             activeChat={activeChat}
             activeProfile={activeProfile}
-            closeChat={() => setActiveChat(null)}
-            closeProfile={() => setActiveProfile(null)}
+            onClose={handleClose}
+            closeProfile={closeProfile}
             socket={socket}
           />
         )}
@@ -280,5 +287,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

@@ -14,6 +14,7 @@ const ConfirmationDialog = ({ show, handleClose, handleConfirm, message }) => {
           Cancel
         </Button>
         <Button variant="primary" onClick={handleConfirm}>
+          
           Confirm
         </Button>
       </Modal.Footer>

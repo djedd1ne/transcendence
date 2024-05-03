@@ -1,13 +1,19 @@
 import React from 'react';
+import Header from './Header';
+import './App.css';
+import ProfilePhoto from './chat-avatar.png';
 
 const ProfilePage = ({ contact, onBack }) => {
   return (
     <div className="profile-page">
-      <img src={contact.avatarUrl || 'default-avatar.png'} alt={`${contact.name}'s avatar`} className="profile-avatar"/>
-      <h1>{contact.name}'s Profile</h1>
+      <Header title={`${contact.intra}'s Profile`} onBack={onBack} />
+      <div className="profile-picNtitle">
+        <img src={contact.avatarUrl || ProfilePhoto} alt={`${contact.name}'s avatar`} className="profile-avatar"/>
+        <h1>{contact.name}</h1>
+      </div>
       <p>Last seen: {contact.lastSeen}</p>
-      <p>Email: {contact.email}</p>  {/* Example additional info */}
-      <button aria-label="Back to Contacts" onClick={onBack}>Back to Contacts</button>
+      <p>Email: {contact.email}</p>
+      {/* <button aria-label="Back to Contacts" onClick={onBack}>{'<'}</button> */}
     </div>
   );
 };

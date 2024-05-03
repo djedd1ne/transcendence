@@ -1,64 +1,151 @@
-/* body {
-  background-image: url('../img/bg-masthead.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-color: #f5f5f5; 
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-} */
+* {
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
 
-/* App.css Updates */
+body {
+  margin: 0;
+  font-size: 16px;
+  background: #f0f0f7;
+  color: #333;
+}
 
 body {
   background-image: url('../img/bg-masthead.jpg');
-  background-size: cover;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-color: #f5f5f5;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   margin: 0;
-  padding: 0;
+  padding: 0; */
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #eaeaea;
+  color: #333;
+  padding: 10px 20px;
+  justify-content: space-between;
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
+}
+
+.header-profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background-color: #f9f9f9;
+  border: 2px solid #cd07db;
+  
+}
+
+.header-title {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 18px;
+}
+
+.header-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #007aff;
+  font-size: 16px;
+  background-color: transparent;
+  /* box-shadow: 0 4px 8px rgba(0,0,0,0.2); */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+button {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #007aff;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+input, textarea {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #007aff;
+}
+
+.modal {
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .contact-item {
-  background-color: rgba(249, 249, 249, 0.8); /* Slight transparency */
-  border-bottom: 1px solid rgba(204, 204, 204, 0.5); /* Softer border */
+  background-color: rgba(249, 249, 249, 0.8); 
+  border-bottom: 1px solid rgba(204, 204, 204, 0.5); 
 }
 
 .options-dropdown button {
-  color: #007AFF; /* iOS blue */
-  background-color: rgba(255, 255, 255, 0.5); /* Translucent background */
+  color: #007AFF; 
+  background-color: rgba(255, 255, 255, 0.5); 
 }
 
 .options-dropdown button:hover {
-  background-color: rgba(238, 238, 255, 0.6); /* Lighter hover effect */
+  background-color: rgba(238, 238, 255, 0.6); 
 }
 
 .notifications-container {
-  background: rgba(255, 255, 255, 0.95); /* More transparency for frosted glass effect */
-  box-shadow: 0px 0px 20px rgba(0,0,0,0.1); /* Softer shadow */
+  background: rgba(255, 255, 255, 0.95); 
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.1); 
 }
 
 .chat-window {
-  background-color: rgba(255, 255, 255, 0.95); /* Translucent background */
+  background-color: rgba(255, 255, 255, 0.95); 
 }
 
 .chat-header {
-  background-color: rgba(0, 122, 255, 0.95); /* iOS 7 blue, translucent */
+  background-color: rgba(0, 122, 255, 0.95); 
 }
 
 .chat-message.self-end {
-  background-color: rgba(76, 217, 100, 0.95); /* iOS 7 green, translucent */
+  background-color: rgba(76, 217, 100, 0.95); 
 }
 
 .chat-input button {
-  background-color: rgba(0, 122, 255, 0.95); /* Translucent button */
+  background-color: rgba(0, 122, 255, 0.95); 
 }
 
 .profile-page {
-  background-color: rgba(249, 249, 249, 0.95); /* Light translucent background */
+  background-color: rgba(249, 249, 249, 0.95);
+}
+
+.profile-picNtitle {
+  /* padding: 5px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
 }
 
 /* Utilizing backdrop-filter for iOS-style blur effects */
@@ -86,6 +173,7 @@ body {
 }
 
 .options-dropdown {
+  display: none;
   position: relative;
   cursor: pointer;
 }
@@ -137,7 +225,7 @@ body {
   padding: 10px;
 }
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -146,15 +234,13 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
 .chat-icon {
   position: fixed;
-  width: 5%;
-  height: 5%;
-  /* bottom: 20px; */
-  /* right: 20px; */
-  /* z-index: 999; */
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
 }
 
 .chat-window {
@@ -218,7 +304,7 @@ body {
 }
 
 .profile-page {
-  padding: 20px;
+  /* padding: 20px; */
   background-color: #f9f9f9;
   border: 1px solid #ccc;
   margin: 20px;
@@ -232,6 +318,7 @@ body {
 .profile-page p {
   font-size: 16px;
   color: #666;
+  margin-left: 20px;
 }
 
 .profile-page button {
@@ -246,6 +333,15 @@ body {
 /* Add smooth transitions for opening/closing components */
 .chat-box {
   transition: transform 0.3s ease-in-out;
+  width: 50%;
+  bottom: 20px;
+  right: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  position: fixed;
+  z-index: 1000;
 }
 
 /* Style for the new profile page and dialog */
