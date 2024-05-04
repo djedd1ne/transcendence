@@ -241,6 +241,7 @@ input:focus, textarea:focus {
   bottom: 20px;
   right: 20px;
   z-index: 999;
+  cursor:  ;
 }
 
 .chat-window {

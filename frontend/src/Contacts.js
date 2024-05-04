@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ChatWindow from './ChatWindow';
+import ProfilePage from './ProfilePage';
+import Header from './Header';
 import DeleteContact from './DeleteContact';
 import avatarUrl from './chat-avatar.png';
+import logoPic from './pingpong-icon.webp';
 
-const Contacts = ({ contacts, onChat, onBlock, onViewProfile, onDelete }) => {
+const Contacts = ({ contacts, onBack, onClose, profilePic, onChat, onBlock, onViewProfile, onDelete, socket }) => {
   return (
     <div>
+      <Header
+        // onBack={() => handleViewChange('contacts')}
+        profilePic={logoPic}
+        title="Game Chat"
+        onClose={'contacts'}
+        />
+
       {contacts.map(contact => (
         <div key={contact.id} className="contact-item">
           <img src={contact.avatarUrl} alt="Profile" className="header-profile-pic" />
           <span className="contact-name">{contact.name}</span>
           <button className="options-button" onClick={(event) => {
-              const dropdown = event.currentTarget.nextElementSibling;
-              dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            const dropdown = event.currentTarget.nextElementSibling;
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
           }}>Options</button>
           <div className="options-dropdown">
             <button onClick={() => onChat(contact)}>Chat</button>
@@ -19,11 +30,12 @@ const Contacts = ({ contacts, onChat, onBlock, onViewProfile, onDelete }) => {
             <DeleteContact 
               contact={contact} 
               onDeleteConfirm={() => onDelete(contact.id)}  // Ensure this prop is correctly utilized
-            />
+              />
             <button onClick={() => onViewProfile(contact)}>View Profile</button>
           </div>
         </div>
       ))}
+      {/* {view === 'contacts' && <Contacts contacts={contacts} onChat={(contact) => { setActiveChat(contact); handleViewChange('chat'); }} onViewProfile={(contact) => { setActiveProfile(contact); handleViewChange('profile'); }} />} */}
     </div>
   );
 };
