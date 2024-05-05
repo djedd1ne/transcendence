@@ -46,7 +46,10 @@ const ChatWindow = ({ contact, onClose, onBack, socket }) => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Type a message..."
-        />
+          onKeyDown={(e) => { 
+            if (e.key === "Enter") 
+              sendMessage(); }}
+            />
         <button onClick={sendMessage}>Send</button>
       </div>
     </div>
