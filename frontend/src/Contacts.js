@@ -10,12 +10,10 @@ const Contacts = ({ contacts, onBack, onClose, profilePic, onChat, onBlock, onVi
   return (
     <div>
       <Header
-        // onBack={() => handleViewChange('contacts')}
         profilePic={logoPic}
         title="Game Chat"
-        onClose={'contacts'}
+        onClose={onClose}
         />
-
       {contacts.map(contact => (
         <div key={contact.id} className="contact-item">
           <img src={contact.avatarUrl} alt="Profile" className="header-profile-pic" />
@@ -35,7 +33,6 @@ const Contacts = ({ contacts, onBack, onClose, profilePic, onChat, onBlock, onVi
           </div>
         </div>
       ))}
-      {/* {view === 'contacts' && <Contacts contacts={contacts} onChat={(contact) => { setActiveChat(contact); handleViewChange('chat'); }} onViewProfile={(contact) => { setActiveProfile(contact); handleViewChange('profile'); }} />} */}
     </div>
   );
 };

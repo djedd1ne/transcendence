@@ -3,6 +3,8 @@ import Contacts from './Contacts';
 import ChatWindow from './ChatWindow';
 import ProfilePage from './ProfilePage';
 import Header from './Header';
+import logoPic from './pingpong-icon.webp';
+
 
 const ChatBox = ({
   contacts, onBack, onClose, profilePic, socket
@@ -15,15 +17,10 @@ const ChatBox = ({
 
   return (
     <div className="chat-box">
-      {/* <Header
-        // onBack={() => handleViewChange('contacts')}
-        profilePic={profilePic}
-        title="Game Chat"
-        onClose={onClose}
-      /> */}
-      {view === 'contacts' && <Contacts contacts={contacts} onChat={(contact) => { setActiveChat(contact); handleViewChange('chat'); }} onViewProfile={(contact) => { setActiveProfile(contact); handleViewChange('profile'); }} />}
+      <Contacts contacts={contacts} onClose={onClose} />
+      {/* {view === 'contacts' && <Contacts contacts={contacts} onChat={(contact) => { setActiveChat(contact); handleViewChange('chat'); }} onViewProfile={(contact) => { setActiveProfile(contact); handleViewChange('profile'); }} />}
       {view === 'chat' && activeChat && <ChatWindow contact={activeChat} onClose={onClose} onBack={() => handleViewChange('contacts')} socket={socket} />}
-      {view === 'profile' && activeProfile && <ProfilePage contact={activeProfile} onBack={() => handleViewChange('contacts')} />}
+      {view === 'profile' && activeProfile && <ProfilePage contact={activeProfile} onBack={() => handleViewChange('contacts')} />} */}
     </div>
   );
 };
