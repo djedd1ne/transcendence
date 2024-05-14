@@ -1,5 +1,3 @@
-// App.js
-
 import './App.css';
 import React, { useState, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -34,31 +32,44 @@ const client = axios.create({
   baseURL: "http://127.0.0.1:8000"
 });
 
+// Backend URL
+const url = 'http://localhost:8000';
 
 function App() {
   const [contacts, setContacts] = useState([
-    { id: 1, intra: 'sheali', name: 'Alice Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
-    { id: 2, intra: 'sheali', name: 'Bob Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
-    { id: 3, intra: 'sheali', name: 'Charlie Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl },
-    { id: 4, intra: 'sheali', name: 'David Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
-    { id: 5, intra: 'sheali', name: 'Eva Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
-    { id: 6, intra: 'sheali', name: 'Fiona Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
-    { id: 7, intra: 'sheali', name: 'George Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl },
-    { id: 8, intra: 'sheali', name: 'Hannah Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl },
-    { id: 9, intra: 'sheali', name: 'Ivan Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
-    { id: 10,intra: 'sheali',  name: 'Julia Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl}
+    { id: '1', intra: 'sheali', name: 'Alice Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
+    { id: '2', intra: 'sheali', name: 'Bob Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
+    { id: '3', intra: 'sheali', name: 'Charlie Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl },
+    { id: '4', intra: 'sheali', name: 'David Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
+    { id: '5', intra: 'sheali', name: 'Eva Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
+    { id: '6', intra: 'sheali', name: 'Fiona Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
+    { id: '7', intra: 'sheali', name: 'George Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl },
+    { id: '8', intra: 'sheali', name: 'Hannah Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl },
+    { id: '9', intra: 'sheali', name: 'Ivan Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl},
+    { id: '10',intra: 'sheali',  name: 'Julia Doe', blocked: false, chatHistory: [], profileViewed: false, avatarUrl: avatarUrl}
   ]);
 
-  const socket = useWebSocket('ws:http://127.0.0.1:8000/ws');
+  const userId = new URLSearchParams(window.location.search).get('user') || 'default-user-id';
+  const socket = useWebSocket(url);
 
   useEffect(() => {
     if (socket) {
-      socket.onmessage = (event) => {
-        const message = JSON.parse(event.data);
-        console.log('New message:', message);
-      };
+      socket.emit('join', { userId });
+      socket.on('new-message', (message) => {
+        setContacts((prevContacts) => {
+          return prevContacts.map(contact => {
+            if (contact.id === message.contactId) {
+              return {
+                ...contact,
+                chatHistory: [...contact.chatHistory, message]
+              };
+            }
+            return contact;
+          });
+        });
+      });
     }
-  }, [socket]);
+  }, [socket, userId]);
 
   const handleDeleteContact = contactId => {
     setContacts(currentContacts => currentContacts.filter(contact => contact.id !== contactId));

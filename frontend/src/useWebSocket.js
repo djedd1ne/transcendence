@@ -5,7 +5,7 @@ const useWebSocket = (url) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const socket = io('http://localhost:3000');
+    const socket = io(url);
 
     socket.on('connect', () => {
       console.log('WebSocket Connected:', socket.id);
@@ -21,7 +21,7 @@ const useWebSocket = (url) => {
       socket.disconnect();
       console.log('WebSocket Disconnected');
     };
-  }, ['http://localhost:3000']);
+  }, [url]);
 
   return socket;
 };

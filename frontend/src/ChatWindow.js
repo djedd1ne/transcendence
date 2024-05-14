@@ -16,9 +16,9 @@ const ChatWindow = ({ contact, onClose, onBack, socket }) => {
 
   const sendMessage = () => {
     if (message.trim()) {
-      const newMessage = { message, time: new Date().toLocaleTimeString(), isUser: true };
+      const newMessage = { message, time: new Date().toLocaleTimeString(), isUser: true, contactId: contact.id };
       setChatHistory([...chatHistory, newMessage]);
-      socket.emit('send-message', { ...newMessage, contactId: contact.id });
+      socket.emit('send-message', newMessage);
       setMessage('');
     }
   };
@@ -28,7 +28,7 @@ const ChatWindow = ({ contact, onClose, onBack, socket }) => {
       <Header
         onBack={onBack}
         profilePic={contact.avatarUrl}
-        title={`${contact.name}'`}
+        title={`${contact.name}`}
         onOptions={() => console.log('Options clicked')}
         onClose={onClose}
       />
